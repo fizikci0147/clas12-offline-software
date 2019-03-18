@@ -224,8 +224,9 @@ public class ClusterFinder {
                 cf.SetFitArray(clus, "LC"); 
                 cf.Fit(clus, true);
             }
-            if (clus.get_fitProb() > Constants.HITBASEDTRKGMINFITHI2PROB || 
-                    (clus.size() < Constants.HITBASEDTRKGNONSPLITTABLECLSSIZE && clus.get_fitProb()!=0) ){            
+            if (clus.get_fitProb() > Constants.HITBASEDTRKGMINFITHI2PROB  ){
+                //    || 
+                //    (clus.size() < Constants.HITBASEDTRKGNONSPLITTABLECLSSIZE && clus.get_fitProb()!=0) ){            
                 fittedClusList.add(clus); //if the chi2 prob is good enough, then just add the cluster, or if the cluster is not split-able because it has too few hits                
             } else {  
                 
