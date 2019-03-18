@@ -238,7 +238,7 @@ public class ClusterFinder {
         ArrayList rmHits = new ArrayList<FittedHit>();
         for (FittedCluster clus : fittedClusList) {
             if (clus != null && clus.size() > 3 && clus.get_fitProb()>Constants.HITBASEDTRKGMINFITHI2PROB) {
-                rmHits.clear();
+                
                 // update the hits
                 for (FittedHit fhit : clus) {
                     fhit.set_TrkgStatus(0);
@@ -250,29 +250,16 @@ public class ClusterFinder {
                 cf.Fit(clus, true); 
                 cf.SetResidualDerivedParams(clus, false, false, DcDetector); //calcTimeResidual=false, resetLRAmbig=false, local= false
                 
+                clus = ct.ClusterCleaner(clus, cf, DcDetector);
                 // update the hits
                 for (FittedHit fhit : clus) {
-                    if(fhit.get_Residual()>1.4*fhit.get_CellSize()) {
-                        fhit.set_TrkgStatus(-1);
-                        rmHits.add(fhit);
-                        continue;
-                    }
                     fhit.set_AssociatedClusterID(clus.get_Id());
                 }
-                if(rmHits.size()>0) {
-                    clus.removeAll(rmHits);
-                    //refit
-                    cf.SetFitArray(clus, "TSC"); 
-                    cf.Fit(clus, true); 
-                    cf.SetResidualDerivedParams(clus, false, false, DcDetector); //calcTimeResidual=false, resetLRAmbig=false, local= false
-                
-                }
-                
                 cf.SetFitArray(clus, "TSC");
                 cf.Fit(clus, false);
                 cf.SetSegmentLineParameters(clus.get(0).get_Z(), clus);
-
-                if (clus != null) {
+               
+                if (clus != null ) {
                     refittedClusList.add(clus);
                 }
 
