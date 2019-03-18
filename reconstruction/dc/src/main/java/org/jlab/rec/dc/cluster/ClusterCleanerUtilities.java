@@ -775,7 +775,6 @@ public class ClusterCleanerUtilities {
      * @return a new cluster that is contiguous
      */
     public void IsolatedHitsPruner(FittedCluster clus) {
-
         int min = 1000;
         int max = -1000;
         for (int i = 0; i < clus.size(); i++) {
@@ -791,7 +790,7 @@ public class ClusterCleanerUtilities {
         int wireRange = max - min + 1;
         FittedHit[][] HitArray = new FittedHit[6][wireRange];
 
-        for (int i = 0; i < clus.size(); i++) {
+        for (int i = 0; i < clus.size(); i++) { 
             int wi = clus.get(i).get_Wire() - min;
             if (wi < -1) {
                 continue;

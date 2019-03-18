@@ -192,6 +192,7 @@ public class ClusterFinder {
                 continue;
             //System.out.println(" I passed this cluster "+clus.printInfo());
             FittedCluster fClus = new FittedCluster(clus);
+            
             //ct.IsolatedHitsPruner(fClus);
             // Flag out-of-timers
             //if(Constants.isSimulation==true) {
@@ -219,6 +220,9 @@ public class ClusterFinder {
             cf.Fit(clus, true);
             if(clus.get_fitProb()<Constants.HITBASEDTRKGMINFITHI2PROB) { 
                 ct.IsolatedHitsPruner(clus);
+                //Refit
+                cf.SetFitArray(clus, "LC"); 
+                cf.Fit(clus, true);
             }
             if (clus.get_fitProb() > Constants.HITBASEDTRKGMINFITHI2PROB || 
                     (clus.size() < Constants.HITBASEDTRKGNONSPLITTABLECLSSIZE && clus.get_fitProb()!=0) ){            
