@@ -386,8 +386,8 @@
           {"name":"evno",        "id":2, "type":"I", "info":"event number"},
           {"name":"timestamp",   "id":3, "type":"L", "info":"timestamp (4ns)"},
           {"name":"helicity",    "id":4, "type":"B", "info":"helicity"},
-          {"name":"sync",        "id":5, "type":"B", "info","sync"},
-          {"name":"quartet",     "id":6, "type":"B", "info","quartet"}
+          {"name":"sync",        "id":5, "type":"B", "info":"sync"},
+          {"name":"quartet",     "id":6, "type":"B", "info":"quartet"}
       ]
   },
   {
