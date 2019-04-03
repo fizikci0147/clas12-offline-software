@@ -1,10 +1,11 @@
 package org.jlab.detector.decode;
 
+import org.jlab.jnp.hipo4.data.SchemaFactory;
 import org.jlab.jnp.hipo4.data.Bank;
 
 /**
  *  See:
- *  common-tools/doc
+ *  common-tools/clas-detector/doc
  *  https://logbooks.jlab.org/entry/3531353
  *
  * @author baltzell
@@ -34,6 +35,8 @@ public class HelicityState {
             return ped>HALFADC ? POSITIVE : NEGATIVE;
     }
 
+    public HelicityState(){}
+
     public HelicityState(Bank adcBank) {
         for (int ii=0; ii<adcBank.getRows(); ii++) {
             if (adcBank.getInt("sector",ii) != SECTOR) continue;
@@ -54,6 +57,14 @@ public class HelicityState {
         }
     }
 
+    public Bank makeBank(SchemaFactory schema) {
+        Bank bank=new Bank(schema.getSchema("HEL::flip"),1);
+        bank.putByte("helicity", 0, this.helicity);
+        bank.putByte("sync", 0, this.sync);
+        bank.putByte("quartet", 0, this.quartet);
+        return bank;
+    }
+    
     public boolean equals(HelicityState other) {
         if (this.sync != other.sync) return false;
         if (this.helicity != other.helicity) return false;

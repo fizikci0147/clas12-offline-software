@@ -652,6 +652,7 @@ public class CLASDecoder4 {
 
             Bank   rawScaler = new Bank(writer.getSchemaFactory().getSchema("RAW::scaler"));
             Bank  rawRunConf = new Bank(writer.getSchemaFactory().getSchema("RUN::config"));
+            Bank  helAdc = new Bank(writer.getSchemaFactory().getSchema("HEL::adc"));
             Event scalerEvent = new Event();
 
 
@@ -673,6 +674,9 @@ public class CLASDecoder4 {
             for(String inputFile : inputList){
                 EvioSource reader = new EvioSource();
                 reader.open(inputFile);
+
+                HelicityState prevHelicity = new HelicityState();
+                
                 while(reader.hasEvent()==true){
                     EvioDataEvent event = (EvioDataEvent) reader.getNextEvent();
 
@@ -693,8 +697,16 @@ public class CLASDecoder4 {
                     int eventTag;
                     decodedEvent.read(rawScaler);
                     decodedEvent.read(rawRunConf);
+                    decodedEvent.read(helAdc);
+            
+                    HelicityState thisHelicity = new HelicityState(helAdc);
+                    Bank helFlip = null;
+                    if (!thisHelicity.equals(prevHelicity)) {
+                      helFlip = thisHelicity.makeBank(writer.getSchemaFactory());
+                      prevHelicity = thisHelicity;
+                    }
                         
-                    if(rawScaler.getRows()>0 || epics!=null) {
+                    if(rawScaler.getRows()>0 || epics!=null || helFlip!=null) {
                         scalerEvent.reset();
 
                         if(rawScaler.getRows()>0) scalerEvent.write(rawScaler);
@@ -709,6 +721,11 @@ public class CLASDecoder4 {
                         if (epics!=null) {
                             decodedEvent.write(epics);
                             scalerEvent.write(epics);
+                        }
+
+                        if (helFlip!=null) {
+                            decodedEvent.write(helFlip);
+                            scalerEvent.write(helFlip);
                         }
                         
                         writer.addEvent(scalerEvent, 1);
