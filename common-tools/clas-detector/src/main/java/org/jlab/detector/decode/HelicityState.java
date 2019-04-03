@@ -3,6 +3,9 @@ package org.jlab.detector.decode;
 import org.jlab.jnp.hipo4.data.Bank;
 
 /**
+ *  See:
+ *  common-tools/doc
+ *  https://logbooks.jlab.org/entry/3531353
  *
  * @author baltzell
  */
