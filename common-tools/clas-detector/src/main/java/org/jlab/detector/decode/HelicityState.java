@@ -27,8 +27,11 @@ public class HelicityState {
     private byte helicity=UDF;
     private byte sync=UDF;
     private byte quartet=UDF;
+    private long timestamp=UDF;
+    private int  event=UDF;
+    private int  run=UDF;
 
-    private byte getState(short ped) {
+    private byte getFadcState(short ped) {
         if (ped == HALFADC)
             return UDF;
         else
@@ -43,13 +46,13 @@ public class HelicityState {
             if (adcBank.getInt("layer",ii) != LAYER) continue;
             switch (adcBank.getInt("component",ii)) {
                 case HELICITY_COMPONENT:
-                    this.helicity = this.getState(adcBank.getShort("ped",ii));
+                    this.helicity = this.getFadcState(adcBank.getShort("ped",ii));
                     break;
                 case SYNC_COMPONENT:
-                    this.sync = this.getState(adcBank.getShort("ped",ii));
+                    this.sync = this.getFadcState(adcBank.getShort("ped",ii));
                     break;
                 case QUARTET_COMPONENT:
-                    this.quartet = this.getState(adcBank.getShort("ped",ii));
+                    this.quartet = this.getFadcState(adcBank.getShort("ped",ii));
                     break;
                 default:
                     break;
@@ -57,26 +60,48 @@ public class HelicityState {
         }
     }
 
-    public Bank makeBank(SchemaFactory schema) {
-        Bank bank=new Bank(schema.getSchema("HEL::flip"),1);
+    public double getSecondsDelta(HelicityState other) {
+        return (this.timestamp-other.timestamp)*4e-9;
+    }
+    public int getEventDelta(HelicityState other) {
+        return this.event-other.event;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%+d/%+d/%+d",this.helicity,this.sync,this.quartet);
+    }
+
+    public Bank makeFlipBank(SchemaFactory schemaFactory) {
+        Bank bank=new Bank(schemaFactory.getSchema("HEL::flip"),1);
+        bank.putLong("timestamp", 0, this.timestamp);
+        bank.putInt("event", 0, this.event);
+        bank.putInt("run", 0, this.run);
         bank.putByte("helicity", 0, this.helicity);
         bank.putByte("sync", 0, this.sync);
         bank.putByte("quartet", 0, this.quartet);
         return bank;
     }
-    
+
+    public final boolean isValid() {
+        return this.helicity!=UDF &&
+               this.sync!=UDF &&
+               this.quartet!=UDF;
+    }
+
     public boolean equals(HelicityState other) {
-        if (this.sync != other.sync) return false;
         if (this.helicity != other.helicity) return false;
+        if (this.sync != other.sync) return false;
         return this.quartet == other.quartet;
     }
 
-    public boolean isValid() {
-        return this.helicity!=UDF && this.sync!=UDF && this.quartet!=UDF;
-    }
-
+    public void setTimestamp(long timestamp) { this.timestamp=timestamp; }
+    public void setEvent(int event) { this.event=event; }
+    public void setRun(int run) { this.run=run; }
     public byte getHelicity() { return this.helicity; }
     public byte getSync() { return this.sync; }
     public byte getQuartet() { return this.quartet; }
+    public long getTimestamp() { return timestamp; }
+    public int  getEvent() { return event; }
 
 }

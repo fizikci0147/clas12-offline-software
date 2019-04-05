@@ -383,7 +383,7 @@
       "info":  "Helicity flips from ADC bank.  State values are -1/0/+1, where 0 is invalid.",
       "entries": [
           {"name":"run",         "id":1, "type":"I", "info":"run number"},
-          {"name":"evno",        "id":2, "type":"I", "info":"event number"},
+          {"name":"event",       "id":2, "type":"I", "info":"event number"},
           {"name":"timestamp",   "id":3, "type":"L", "info":"timestamp (4ns)"},
           {"name":"helicity",    "id":4, "type":"B", "info":"helicity"},
           {"name":"sync",        "id":5, "type":"B", "info":"sync"},

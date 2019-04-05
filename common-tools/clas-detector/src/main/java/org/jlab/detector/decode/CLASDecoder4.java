@@ -671,12 +671,16 @@ public class CLASDecoder4 {
                 decoder.setRunNumber(nrun,true);
             }
 
+            int good=0;
+            int bad=0;
+
             for(String inputFile : inputList){
                 EvioSource reader = new EvioSource();
                 reader.open(inputFile);
 
                 HelicityState prevHelicity = new HelicityState();
-                
+                HelicityState prevHelicityTest = new HelicityState();
+
                 while(reader.hasEvent()==true){
                     EvioDataEvent event = (EvioDataEvent) reader.getNextEvent();
 
@@ -698,14 +702,56 @@ public class CLASDecoder4 {
                     decodedEvent.read(rawScaler);
                     decodedEvent.read(rawRunConf);
                     decodedEvent.read(helAdc);
-            
-                    HelicityState thisHelicity = new HelicityState(helAdc);
+
                     Bank helFlip = null;
-                    if (!thisHelicity.equals(prevHelicity)) {
-                      helFlip = thisHelicity.makeBank(writer.getSchemaFactory());
-                      prevHelicity = thisHelicity;
+                    if (header!=null) {
+
+                        HelicityState thisHelicity = new HelicityState(helAdc);
+                        thisHelicity.setTimestamp(header.getLong("timestamp",0));
+                        thisHelicity.setEvent(header.getInt("event",0));
+                        thisHelicity.setRun(header.getInt("run",0));
+
+/*
+                        if (rawScaler.getRows()>0) {
+                            DaqScalers.StruckRawReading srr = new DaqScalers.StruckRawReading(rawScaler);
+                            System.out.println(String.format("    :  %+d/  /%+d           %7d",
+                                    srr.getHelicity(),srr.getQuartet(),counter));
+                        }
+
+                        if (!thisHelicity.isValid() ||
+                            thisHelicity.getSync() != prevHelicityTest.getSync()) {
+
+                            if (!thisHelicity.isValid()) {
+                                System.out.println(String.format(" ERR:  %s %5.2f %3d %7d",
+                                    thisHelicity.toString(),
+                                    1000*thisHelicity.getSecondsDelta(prevHelicityTest),
+                                    thisHelicity.getEventDelta(prevHelicityTest),
+                                    counter));
+                            }
+
+                            if (thisHelicity.getSync() != prevHelicityTest.getSync()) {
+                                System.out.println(String.format("FLIP:  %s %5.2f %3d %7d",
+                                    thisHelicity.toString(),
+                                    1000*thisHelicity.getSecondsDelta(prevHelicityTest),
+                                    thisHelicity.getEventDelta(prevHelicityTest),
+                                    counter));
+                            }
+
+                            prevHelicityTest=thisHelicity;
+                        }
+*/
+                        if (thisHelicity.isValid() && !thisHelicity.equals(prevHelicity)) {
+                            System.out.println(String.format("FLIP:  %s %5.2f %3d %7d",
+                                        thisHelicity.toString(),
+                                        1000*thisHelicity.getSecondsDelta(prevHelicity),
+                                        thisHelicity.getEventDelta(prevHelicity),
+                                        counter));
+                            helFlip = thisHelicity.makeFlipBank(writer.getSchemaFactory());
+                            prevHelicity = thisHelicity;
+                        }
                     }
-                        
+
+
                     if(rawScaler.getRows()>0 || epics!=null || helFlip!=null) {
                         scalerEvent.reset();
 
@@ -727,14 +773,14 @@ public class CLASDecoder4 {
                             decodedEvent.write(helFlip);
                             scalerEvent.write(helFlip);
                         }
-                        
+
                         writer.addEvent(scalerEvent, 1);
                     }
 
                     writer.addEvent(decodedEvent,0);
 
                     counter++;
-                    progress.updateStatus();
+                    //progress.updateStatus();
                     if(nevents>0){
                         if(counter>=nevents) break;
                     }
@@ -742,6 +788,7 @@ public class CLASDecoder4 {
             }
             writer.close();
         }
+
         /*
         CLASDecoder decoder = new CLASDecoder();
         EvioSource reader = new EvioSource();
