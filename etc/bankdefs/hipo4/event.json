@@ -5,19 +5,13 @@
         "item": 10,
         "info": "Event Header Bank",
         "entries": [
-                {"name":"NRUN",     "id":1,  "type":"I", "info":"Run Number"},
-                {"name":"NEVENT",   "id":2,  "type":"I", "info":"Event Number"},
-                {"name":"EVNTime",  "id":3,  "type":"F", "info":"Event Time"},
-                {"name":"TYPE",     "id":4,  "type":"B", "info":"Event Type (Data or MC)"},
-                {"name":"EvCAT",    "id":5,  "type":"S", "info":"Event Category, if >0:  e-, e-p, e-pi+....."},
-                {"name":"NPGP",     "id":6,  "type":"S", "info":"Number of Final (Timed-based) Reconstructed Particles*100 + Number of Geometrically Reconstructed Particles"},
-                {"name":"TRG",      "id":7,  "type":"L", "info":"Trigger Type (CLAS12_e-, FT_CLAS12_h, CLAS12_H,...) + Prescale Factor for that Trigger"},
-                {"name":"BCG",      "id":8,  "type":"F", "info":"Beam charge, gated (nano-Coulomb)"},
-                {"name":"LT",       "id":9,  "type":"D", "info":"Lifetime"},
-                {"name":"STTime",   "id":10, "type":"F", "info":"Event Start Time (ns)"},
-                {"name":"RFTime",   "id":11, "type":"F", "info":"RF Time (ns)"},
-                {"name":"Helic",    "id":12, "type":"B", "info":"Helicity of Event (0 or 1, else undefined)"},
-                {"name":"PTIME",    "id":13, "type":"F", "info":"Event Processing Time (UNIX Time = seconds)"}
+                {"name":"topology", "id":1, "type":"L", "info":"100K*positives + 1K*negatives + neutrals"},
+                {"name":"BCG",      "id":2, "type":"F", "info":"Beam charge, gated (nano-Coulomb)"},
+                {"name":"LT",       "id":3, "type":"D", "info":"Lifetime"},
+                {"name":"STTime",   "id":4, "type":"F", "info":"Event Start Time (ns)"},
+                {"name":"RFTime",   "id":5, "type":"F", "info":"RF Time (ns)"},
+                {"name":"helicity", "id":6, "type":"B", "info":"Helicity of Event (-1 or +1, else undefined)"},
+                {"name":"procTime", "id":7, "type":"F", "info":"Event Processing Time (UNIX Time = seconds)"}
             ]
     },
     {
@@ -69,7 +63,8 @@
             {"name":"m3u",          "id":22, "type":"F", "info":"3rd moment of the shower on U-side"},
             {"name":"m3v",          "id":23, "type":"F", "info":"3rd moment of the shower on V-side"},
             {"name":"m3w",          "id":24, "type":"F", "info":"3rd moment of the shower on W-side"},
-            {"name":"status",       "id":25, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":25, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":26, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -91,7 +86,8 @@
             {"name":"z",            "id":11, "type":"F", "info":"Z coordinate of the hit (cm)"},
             {"name":"dtheta",       "id":12, "type":"F", "info":"Expected Theta Resolution (deg)"},
             {"name":"dphi",         "id":13, "type":"F", "info":"Expected Phi Resolution (deg)"},
-            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":15, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -102,19 +98,21 @@
         "entries": [
             {"name":"index",        "id":1,  "type":"S",  "info":"index of the cluster in the specific detector bank"},
             {"name":"pindex",       "id":2,  "type":"S",  "info":"row number in the particle bank hit is associated with"},
-            {"name":"detector",     "id":3,  "type":"B",   "info":"Detector ID, defined in COATJAVA DetectorType"},
-            {"name":"energy",       "id":4,  "type":"F",  "info":"Energy associated with the cluster (GeV)"},
-            {"name":"time",         "id":5,  "type":"F",  "info":"Time associated with the cluster (cm)"},
-            {"name":"path",         "id":6,  "type":"F",  "info":"Path from vertex to the cluster position (cm)"},
-            {"name":"chi2",         "id":7,  "type":"F",  "info":"Chi2 (or quality) of cluster-particle matching"},
-            {"name":"x",            "id":8,  "type":"F",  "info":"X coordinate of the cluster"},
-            {"name":"y",            "id":9,  "type":"F",  "info":"Y coordinate of the cluster"},
-            {"name":"z",            "id":10, "type":"F",  "info":"Z coordinate of the cluster"},
-            {"name":"dx",           "id":11, "type":"F",  "info":"Cluster width in x" },
-            {"name":"dy",           "id":12, "type":"F",  "info":"Cluster width in y" },
-            {"name":"radius",       "id":13, "type":"F",  "info":"Cluster radius" },
-            {"name":"size",         "id":14, "type":"S",  "info":"size of the cluster"},
-            {"name":"status",       "id":15, "type":"S", "info":"hit status"}
+            {"name":"detector",     "id":3,  "type":"B",  "info":"Detector ID, defined in COATJAVA DetectorType"},
+            {"name":"layer",        "id":4,  "type":"B",  "info":"Detector Layer"},
+            {"name":"energy",       "id":5,  "type":"F",  "info":"Energy associated with the cluster (GeV)"},
+            {"name":"time",         "id":6,  "type":"F",  "info":"Time associated with the cluster (cm)"},
+            {"name":"path",         "id":7,  "type":"F",  "info":"Path from vertex to the cluster position (cm)"},
+            {"name":"chi2",         "id":8,  "type":"F",  "info":"Chi2 (or quality) of cluster-particle matching"},
+            {"name":"x",            "id":9,  "type":"F",  "info":"X coordinate of the cluster"},
+            {"name":"y",            "id":10,  "type":"F",  "info":"Y coordinate of the cluster"},
+            {"name":"z",            "id":11, "type":"F",  "info":"Z coordinate of the cluster"},
+            {"name":"dx",           "id":12, "type":"F",  "info":"Cluster width in x" },
+            {"name":"dy",           "id":13, "type":"F",  "info":"Cluster width in y" },
+            {"name":"radius",       "id":14, "type":"F",  "info":"Cluster radius" },
+            {"name":"size",         "id":15, "type":"S",  "info":"size of the cluster"},
+            {"name":"status",       "id":16, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":17, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -136,7 +134,8 @@
             {"name":"x",            "id":11, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":12, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":13, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":15, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -150,7 +149,7 @@
             {"name":"detector",     "id":3,  "type":"B",  "info":"Detector ID, defined in COATJAVA DetectorType"},
             {"name":"sector",       "id":4,  "type":"B",  "info":"Sector of the track"},
             {"name":"status",       "id":5,  "type":"S", "info":"status of the track"},
-            {"name":"q",            "id":6,  "type":"B",  "info":"charge of the track"},
+            {"name":"charge",       "id":6,  "type":"B",  "info":"charge of the track"},
             {"name":"chi2",         "id":7,  "type":"F", "info":"Chi2 (or quality) track fitting"},
             {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"}
         ]
@@ -181,19 +180,13 @@
         "item" : 30,
         "info": "Event Header Bank",
         "entries": [
-                {"name":"NRUN",     "id":1,  "type":"I", "info":"Run Number"},
-                {"name":"NEVENT",   "id":2,  "type":"I", "info":"Event Number"},
-                {"name":"EVNTime",  "id":3,  "type":"F", "info":"Event Time"},
-                {"name":"TYPE",     "id":4,  "type":"B", "info":"Event Type (Data or MC)"},
-                {"name":"EvCAT",    "id":5,  "type":"S", "info":"Event Category, if >0:  e-, e-p, e-pi+....."},
-                {"name":"NPGP",     "id":6,  "type":"S", "info":"Number of Final (Timed-based) Reconstructed Particles*100 + Number of Geometrically Reconstructed Particles"},
-                {"name":"TRG",      "id":7,  "type":"L", "info":"Trigger Type (CLAS12_e-, FT_CLAS12_h, CLAS12_H,...) + Prescale Factor for that Trigger"},
-                {"name":"BCG",      "id":8,  "type":"F", "info":"Faraday Cup Gated (nano-Coulomb)"},
-                {"name":"LT",       "id":9,  "type":"D", "info":"Clock"},
-                {"name":"STTime",   "id":10, "type":"F", "info":"Event Start Time (ns)"},
-                {"name":"RFTime",   "id":11, "type":"F", "info":"RF Time (ns)"},
-                {"name":"Helic",    "id":12, "type":"B", "info":"Helicity of Event (0 or 1 else undefined)"},
-                {"name":"PTIME",    "id":13, "type":"F", "info":"Event Processing Time (UNIX Time = seconds)"}
+                {"name":"topology", "id":1, "type":"L", "info":"100K*positives + 1K*negatives + neutrals"},
+                {"name":"BCG",      "id":2, "type":"F", "info":"Beam charge, gated (nano-Coulomb)"},
+                {"name":"LT",       "id":3, "type":"D", "info":"Lifetime"},
+                {"name":"STTime",   "id":4, "type":"F", "info":"Event Start Time (ns)"},
+                {"name":"RFTime",   "id":5, "type":"F", "info":"RF Time (ns)"},
+                {"name":"helicity", "id":6, "type":"B", "info":"Helicity of Event (-1 or +1, else undefined)"},
+                {"name":"procTime", "id":7, "type":"F", "info":"Event Processing Time (UNIX Time = seconds)"}
             ]
     },
     {
@@ -245,7 +238,8 @@
             {"name":"m3u",          "id":22, "type":"F", "info":"3rd moment of the shower on U-side"},
             {"name":"m3v",          "id":23, "type":"F", "info":"3rd moment of the shower on V-side"},
             {"name":"m3w",          "id":24, "type":"F", "info":"3rd moment of the shower on W-side"},
-            {"name":"status",       "id":25, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":25, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":26, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -267,7 +261,8 @@
             {"name":"z",            "id":11, "type":"F", "info":"Z coordinate of the hit (cm)"},
             {"name":"dtheta",       "id":13, "type":"F", "info":"Expected Theta Resolution (deg)"},
             {"name":"dphi",         "id":14, "type":"F", "info":"Expected Phi Resolution (deg)"},
-            {"name":"status",       "id":15, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":15, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":16, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -290,7 +285,8 @@
             {"name":"dy",           "id":12, "type":"F",  "info":"Cluster width in y" },
             {"name":"radius",       "id":13, "type":"F",  "info":"Cluster radius" },
             {"name":"size",         "id":14, "type":"S",  "info":"size of the cluster"},
-            {"name":"status",       "id":15, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":15, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":16, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -312,7 +308,8 @@
             {"name":"x",            "id":11, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":12, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":13, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"},
+            {"name":"chi2",         "id":15, "type":"F", "info":"matching quality"}
         ]
     },
     {
@@ -326,7 +323,7 @@
             {"name":"detector",     "id":3,  "type":"B",  "info":"Detector ID, defined in COATJAVA DetectorType"},
             {"name":"sector",       "id":4,  "type":"B",  "info":"Sector of the track"},
             {"name":"status",       "id":5,  "type":"S", "info":"status of the track"},
-            {"name":"q",            "id":6,  "type":"B",  "info":"charge of the track"},
+            {"name":"charge",       "id":6,  "type":"B",  "info":"charge of the track"},
             {"name":"chi2",         "id":7,  "type":"F", "info":"Chi2 (or quality) track fitting"},
             {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"}
         ]
@@ -411,7 +408,7 @@
             {"name":"pindex",       "id":1,  "type":"S", "info":"index of the particle in REC::Particle"},
             {"name":"index",        "id":2,  "type":"S", "info":"index of the track in its tracking bank"},
             {"name":"detId",        "id":3,  "type":"S", "info":"representative index of the detector"},
-            {"name":"q",            "id":4,  "type":"B",  "info":"charge of the track"},
+            {"name":"charge",       "id":4,  "type":"B",  "info":"charge of the track"},
             {"name":"x",            "id":5,  "type":"F", "info":"x-position of the track at the detector surface (cm)"},
             {"name":"y",            "id":6,  "type":"F", "info":"y-position of the track at the detector surface (cm)"},
             {"name":"z",            "id":7,  "type":"F", "info":"z-position of the track at the detector surface (cm)"},
