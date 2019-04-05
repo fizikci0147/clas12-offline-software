@@ -47,11 +47,13 @@ public class DetectorData {
                         bank.getFloat("y", row),
                         bank.getFloat("z", row)
                         );
-                response.getMatchedPosition().setXYZ(
-                        bank.getFloat("hx", row),
-                        bank.getFloat("hy", row),
-                        bank.getFloat("hz", row)
-                );
+                if (bank.getDescriptor().hasEntry("hx")) {
+                    response.getMatchedPosition().setXYZ(
+                            bank.getFloat("hx", row),
+                            bank.getFloat("hy", row),
+                            bank.getFloat("hz", row)
+                            );
+                }
                 responses.add(response);
             }
         }
@@ -203,9 +205,11 @@ public class DetectorData {
            bank.setFloat("x", row, (float) r.getPosition().x());
            bank.setFloat("y", row, (float) r.getPosition().y());
            bank.setFloat("z", row, (float) r.getPosition().z());
-           bank.setFloat("hx", row, (float) r.getMatchedPosition().x());
-           bank.setFloat("hy", row, (float) r.getMatchedPosition().y());
-           bank.setFloat("hz", row, (float) r.getMatchedPosition().z());
+           if (bank.getDescriptor().hasEntry("hx")) {
+               bank.setFloat("hx", row, (float) r.getMatchedPosition().x());
+               bank.setFloat("hy", row, (float) r.getMatchedPosition().y());
+               bank.setFloat("hz", row, (float) r.getMatchedPosition().z());
+           }
            bank.setFloat("lu", row, (float) r.getCoordUVW().x()); 
            bank.setFloat("lv", row, (float) r.getCoordUVW().y()); 
            bank.setFloat("lw", row, (float) r.getCoordUVW().z()); 
@@ -240,9 +244,11 @@ public class DetectorData {
            bank.setFloat("x", row, (float) r.getPosition().x());
            bank.setFloat("y", row, (float) r.getPosition().y());
            bank.setFloat("z", row, (float) r.getPosition().z());
-           bank.setFloat("hx", row, (float) r.getMatchedPosition().x());
-           bank.setFloat("hy", row, (float) r.getMatchedPosition().y());
-           bank.setFloat("hz", row, (float) r.getMatchedPosition().z());
+           if (bank.getDescriptor().hasEntry("hx")) {
+               bank.setFloat("hx", row, (float) r.getMatchedPosition().x());
+               bank.setFloat("hy", row, (float) r.getMatchedPosition().y());
+               bank.setFloat("hz", row, (float) r.getMatchedPosition().z());
+           }
            bank.setFloat("path", row, (float) r.getPath());
            bank.setFloat("time", row, (float) r.getTime());
            bank.setFloat("energy", row, (float) r.getEnergy());
@@ -262,8 +268,10 @@ public class DetectorData {
            bank.setFloat("x", row, (float) c.getHitPosition().x());
            bank.setFloat("y", row, (float) c.getHitPosition().y());
            bank.setFloat("z", row, (float) c.getHitPosition().z());
-           bank.setFloat("theta", row, (float) c.getTheta());
-           bank.setFloat("phi", row, (float) c.getPhi());
+           if (bank.getDescriptor().hasEntry("theta")) {
+               bank.setFloat("theta", row, (float) c.getTheta());
+               bank.setFloat("phi", row, (float) c.getPhi());
+           }
            bank.setFloat("dtheta", row, (float) c.getDeltaTheta());
            bank.setFloat("dphi", row, (float) c.getDeltaPhi());
            bank.setFloat("path", row, (float) c.getPath());
@@ -327,13 +335,15 @@ public class DetectorData {
                bank.setByte( "q",       row, (byte)  p.getCharge());
                bank.setFloat("chi2",    row, (float) p.getTrackChi2());
                bank.setShort("NDF",     row, (short) p.getNDF());
-               bank.setFloat("px_nomm", row, (float) p.vector().x());
-               bank.setFloat("py_nomm", row, (float) p.vector().y());
-               bank.setFloat("pz_nomm", row, (float) p.vector().z());
-               bank.setFloat("vx_nomm", row, (float) p.vertex().x());
-               bank.setFloat("vy_nomm", row, (float) p.vertex().y());
-               bank.setFloat("vz_nomm", row, (float) p.vertex().z());
                bank.setShort("status",  row, (short) p.getTrackStatus());
+               if (bank.getDescriptor().hasEntry("px_nomm")) {
+                   bank.setFloat("px_nomm", row, (float) p.vector().x());
+                   bank.setFloat("py_nomm", row, (float) p.vector().y());
+                   bank.setFloat("pz_nomm", row, (float) p.vector().z());
+                   bank.setFloat("vx_nomm", row, (float) p.vertex().x());
+                   bank.setFloat("vy_nomm", row, (float) p.vertex().y());
+                   bank.setFloat("vz_nomm", row, (float) p.vertex().z());
+               }
                row = row + 1;
            }
        }

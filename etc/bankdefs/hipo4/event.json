@@ -57,22 +57,19 @@
             {"name":"x",            "id":10, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":11, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":12, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"hx",           "id":13, "type":"F", "info":"X coordinate of the matched hit (cm)"},
-            {"name":"hy",           "id":14, "type":"F", "info":"Y coordinate of the mathced hit (cm)"},
-            {"name":"hz",           "id":15, "type":"F", "info":"Z coordinate of the matched hit (cm)"},
-            {"name":"lu",           "id":16, "type":"F", "info":"distance on U-side"},
-            {"name":"lv",           "id":17, "type":"F", "info":"distance on V-side"},
-            {"name":"lw",           "id":18, "type":"F", "info":"distance on W-side"},
-            {"name":"du",           "id":19, "type":"F", "info":"shower width on U-side"},
-            {"name":"dv",           "id":20, "type":"F", "info":"shower width on V-side"},
-            {"name":"dw",           "id":21, "type":"F", "info":"shower width on w-side"},
-            {"name":"m2u",          "id":22, "type":"F", "info":"2nd moment of the shower on U-side"},
-            {"name":"m2v",          "id":23, "type":"F", "info":"2nd moment of the shower on V-side"},
-            {"name":"m2w",          "id":24, "type":"F", "info":"2nd moment of the shower on W-side"},
-            {"name":"m3u",          "id":25, "type":"F", "info":"3rd moment of the shower on U-side"},
-            {"name":"m3v",          "id":26, "type":"F", "info":"3rd moment of the shower on V-side"},
-            {"name":"m3w",          "id":27, "type":"F", "info":"3rd moment of the shower on W-side"},
-            {"name":"status",       "id":28, "type":"S", "info":"hit status"}
+            {"name":"lu",           "id":13, "type":"F", "info":"distance on U-side"},
+            {"name":"lv",           "id":14, "type":"F", "info":"distance on V-side"},
+            {"name":"lw",           "id":15, "type":"F", "info":"distance on W-side"},
+            {"name":"du",           "id":16, "type":"F", "info":"shower width on U-side"},
+            {"name":"dv",           "id":17, "type":"F", "info":"shower width on V-side"},
+            {"name":"dw",           "id":18, "type":"F", "info":"shower width on w-side"},
+            {"name":"m2u",          "id":19, "type":"F", "info":"2nd moment of the shower on U-side"},
+            {"name":"m2v",          "id":20, "type":"F", "info":"2nd moment of the shower on V-side"},
+            {"name":"m2w",          "id":21, "type":"F", "info":"2nd moment of the shower on W-side"},
+            {"name":"m3u",          "id":22, "type":"F", "info":"3rd moment of the shower on U-side"},
+            {"name":"m3v",          "id":23, "type":"F", "info":"3rd moment of the shower on V-side"},
+            {"name":"m3w",          "id":24, "type":"F", "info":"3rd moment of the shower on W-side"},
+            {"name":"status",       "id":25, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -92,11 +89,9 @@
             {"name":"x",            "id":9,  "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":10, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":11, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"theta",        "id":12, "type":"F", "info":"DEPRECATED, TO BE REMOVED.  Theta of the matched hit (deg)"},
-            {"name":"phi",          "id":13, "type":"F", "info":"DEPRECATED, TO BE REMOVED.  Phi of the mathced hit (deg)"},
-            {"name":"dtheta",       "id":14, "type":"F", "info":"Expected Theta Resolution (deg)"},
-            {"name":"dphi",         "id":15, "type":"F", "info":"Expected Phi Resolution (deg)"},
-            {"name":"status",       "id":16, "type":"S", "info":"hit status"}
+            {"name":"dtheta",       "id":12, "type":"F", "info":"Expected Theta Resolution (deg)"},
+            {"name":"dphi",         "id":13, "type":"F", "info":"Expected Phi Resolution (deg)"},
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -141,10 +136,7 @@
             {"name":"x",            "id":11, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":12, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":13, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"hx",           "id":14, "type":"F", "info":"X coordinate of the matched hit (cm)"},
-            {"name":"hy",           "id":15, "type":"F", "info":"Y coordinate of the mathced hit (cm)"},
-            {"name":"hz",           "id":16, "type":"F", "info":"Z coordinate of the matched hit (cm)"},
-            {"name":"status",       "id":17, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -160,15 +152,7 @@
             {"name":"status",       "id":5,  "type":"S", "info":"status of the track"},
             {"name":"q",            "id":6,  "type":"B",  "info":"charge of the track"},
             {"name":"chi2",         "id":7,  "type":"F", "info":"Chi2 (or quality) track fitting"},
-            {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"},
-            {"name":"px_nomm",      "id":9,  "type":"F", "info":"x component of the momentum with no MM (cm)"},
-            {"name":"py_nomm",      "id":10, "type":"F", "info":"y component of the momentum with no MM (cm)"},
-            {"name":"pz_nomm",      "id":11, "type":"F", "info":"z component of the momentum with no MM (cm)"},
-            {"name":"vx_nomm",      "id":12, "type":"F", "info":"x component of the vertex (cm)"},
-            {"name":"vy_nomm",      "id":13, "type":"F", "info":"y component of the vertex (cm)"},
-            {"name":"vz_nomm",      "id":14, "type":"F", "info":"z component of the vertex (cm)"},
-            {"name":"chi2_nomm",    "id":15, "type":"F", "info":"Chi2 (or quality) track fitting"},
-            {"name":"NDF_nomm",     "id":16, "type":"S", "info":"number of degrees of freedom in track fitting with no MM"}
+            {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"}
         ]
     },
     {
@@ -249,22 +233,19 @@
             {"name":"x",            "id":10, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":11, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":12, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"hx",           "id":13, "type":"F", "info":"X coordinate of the matched hit (cm)"},
-            {"name":"hy",           "id":14, "type":"F", "info":"Y coordinate of the mathced hit (cm)"},
-            {"name":"hz",           "id":15, "type":"F", "info":"Z coordinate of the matched hit (cm)"},
-            {"name":"lu",           "id":16, "type":"F", "info":"distance on U-side"},
-            {"name":"lv",           "id":17, "type":"F", "info":"distance on V-side"},
-            {"name":"lw",           "id":18, "type":"F", "info":"distance on W-side"},
-            {"name":"du",           "id":19, "type":"F", "info":"shower width on U-side"},
-            {"name":"dv",           "id":20, "type":"F", "info":"shower width on V-side"},
-            {"name":"dw",           "id":21, "type":"F", "info":"shower width on w-side"},
-            {"name":"m2u",          "id":22, "type":"F", "info":"2nd moment of the shower on U-side"},
-            {"name":"m2v",          "id":23, "type":"F", "info":"2nd moment of the shower on V-side"},
-            {"name":"m2w",          "id":24, "type":"F", "info":"2nd moment of the shower on W-side"},
-            {"name":"m3u",          "id":25, "type":"F", "info":"3rd moment of the shower on U-side"},
-            {"name":"m3v",          "id":26, "type":"F", "info":"3rd moment of the shower on V-side"},
-            {"name":"m3w",          "id":27, "type":"F", "info":"3rd moment of the shower on W-side"},
-            {"name":"status",       "id":28, "type":"S", "info":"hit status"}
+            {"name":"lu",           "id":13, "type":"F", "info":"distance on U-side"},
+            {"name":"lv",           "id":14, "type":"F", "info":"distance on V-side"},
+            {"name":"lw",           "id":15, "type":"F", "info":"distance on W-side"},
+            {"name":"du",           "id":16, "type":"F", "info":"shower width on U-side"},
+            {"name":"dv",           "id":17, "type":"F", "info":"shower width on V-side"},
+            {"name":"dw",           "id":18, "type":"F", "info":"shower width on w-side"},
+            {"name":"m2u",          "id":19, "type":"F", "info":"2nd moment of the shower on U-side"},
+            {"name":"m2v",          "id":20, "type":"F", "info":"2nd moment of the shower on V-side"},
+            {"name":"m2w",          "id":21, "type":"F", "info":"2nd moment of the shower on W-side"},
+            {"name":"m3u",          "id":22, "type":"F", "info":"3rd moment of the shower on U-side"},
+            {"name":"m3v",          "id":23, "type":"F", "info":"3rd moment of the shower on V-side"},
+            {"name":"m3w",          "id":24, "type":"F", "info":"3rd moment of the shower on W-side"},
+            {"name":"status",       "id":25, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -284,11 +265,9 @@
             {"name":"x",            "id":9,  "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":10, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":11, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"theta",        "id":12, "type":"F", "info":"DEPRECATED, TO BE REMOVED.  Theta of the matched hit (deg)"},
-            {"name":"phi",          "id":13, "type":"F", "info":"DEPRECATED, TO BE REMOVED.  Phi of the mathced hit (deg)"},
-            {"name":"dtheta",       "id":14, "type":"F", "info":"Expected Theta Resolution (deg)"},
-            {"name":"dphi",         "id":15, "type":"F", "info":"Expected Phi Resolution (deg)"},
-            {"name":"status",       "id":16, "type":"S", "info":"hit status"}
+            {"name":"dtheta",       "id":13, "type":"F", "info":"Expected Theta Resolution (deg)"},
+            {"name":"dphi",         "id":14, "type":"F", "info":"Expected Phi Resolution (deg)"},
+            {"name":"status",       "id":15, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -333,10 +312,7 @@
             {"name":"x",            "id":11, "type":"F", "info":"X coordinate of the hit (cm)"},
             {"name":"y",            "id":12, "type":"F", "info":"Y coordinate of the hit (cm)"},
             {"name":"z",            "id":13, "type":"F", "info":"Z coordinate of the hit (cm)"},
-            {"name":"hx",           "id":14, "type":"F", "info":"X coordinate of the matched hit (cm)"},
-            {"name":"hy",           "id":15, "type":"F", "info":"Y coordinate of the mathced hit (cm)"},
-            {"name":"hz",           "id":16, "type":"F", "info":"Z coordinate of the matched hit (cm)"},
-            {"name":"status",       "id":17, "type":"S", "info":"hit status"}
+            {"name":"status",       "id":14, "type":"S", "info":"hit status"}
         ]
     },
     {
@@ -352,15 +328,7 @@
             {"name":"status",       "id":5,  "type":"S", "info":"status of the track"},
             {"name":"q",            "id":6,  "type":"B",  "info":"charge of the track"},
             {"name":"chi2",         "id":7,  "type":"F", "info":"Chi2 (or quality) track fitting"},
-            {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"},
-            {"name":"px_nomm",      "id":9,  "type":"F", "info":"x component of the momentum with no MM (GeV)"},
-            {"name":"py_nomm",      "id":10, "type":"F", "info":"y component of the momentum with no MM (GeV)"},
-            {"name":"pz_nomm",      "id":11, "type":"F", "info":"z component of the momentum with no MM (GeV)"},
-            {"name":"vx_nomm",      "id":12, "type":"F", "info":"x component of the vertex (cm)"},
-            {"name":"vy_nomm",      "id":13, "type":"F", "info":"y component of the vertex (cm)"},
-            {"name":"vz_nomm",      "id":14, "type":"F", "info":"z component of the vertex (cm)"},
-            {"name":"chi2_nomm",    "id":15, "type":"F", "info":"Chi2 (or quality) track fitting"},
-            {"name":"NDF_nomm",     "id":16, "type":"S", "info":"number of degrees of freedom in track fitting with no MM"}
+            {"name":"NDF",          "id":8,  "type":"S", "info":"number of degrees of freedom in track fitting"}
         ]
     },
     {
