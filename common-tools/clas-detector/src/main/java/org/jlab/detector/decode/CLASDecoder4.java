@@ -671,15 +671,11 @@ public class CLASDecoder4 {
                 decoder.setRunNumber(nrun,true);
             }
 
-            int good=0;
-            int bad=0;
-
             for(String inputFile : inputList){
                 EvioSource reader = new EvioSource();
                 reader.open(inputFile);
 
                 HelicityState prevHelicity = new HelicityState();
-                HelicityState prevHelicityTest = new HelicityState();
 
                 while(reader.hasEvent()==true){
                     EvioDataEvent event = (EvioDataEvent) reader.getNextEvent();
@@ -704,48 +700,24 @@ public class CLASDecoder4 {
                     decodedEvent.read(helAdc);
 
                     Bank helFlip = null;
-                    if (header!=null) {
-
+                    if (helAdc.getRows()>0) {
                         HelicityState thisHelicity = new HelicityState(helAdc);
-                        thisHelicity.setTimestamp(header.getLong("timestamp",0));
-                        thisHelicity.setEvent(header.getInt("event",0));
-                        thisHelicity.setRun(header.getInt("run",0));
-
-/*
-                        if (rawScaler.getRows()>0) {
-                            DaqScalers.StruckRawReading srr = new DaqScalers.StruckRawReading(rawScaler);
-                            System.out.println(String.format("    :  %+d/  /%+d           %7d",
-                                    srr.getHelicity(),srr.getQuartet(),counter));
+                        if (header!=null) {
+                            thisHelicity.setTimestamp(header.getLong("timestamp",0));
+                            thisHelicity.setEvent(header.getInt("event",0));
+                            thisHelicity.setRun(header.getInt("run",0));
                         }
-
-                        if (!thisHelicity.isValid() ||
-                            thisHelicity.getSync() != prevHelicityTest.getSync()) {
-
-                            if (!thisHelicity.isValid()) {
-                                System.out.println(String.format(" ERR:  %s %5.2f %3d %7d",
-                                    thisHelicity.toString(),
-                                    1000*thisHelicity.getSecondsDelta(prevHelicityTest),
-                                    thisHelicity.getEventDelta(prevHelicityTest),
-                                    counter));
-                            }
-
-                            if (thisHelicity.getSync() != prevHelicityTest.getSync()) {
-                                System.out.println(String.format("FLIP:  %s %5.2f %3d %7d",
-                                    thisHelicity.toString(),
-                                    1000*thisHelicity.getSecondsDelta(prevHelicityTest),
-                                    thisHelicity.getEventDelta(prevHelicityTest),
-                                    counter));
-                            }
-
-                            prevHelicityTest=thisHelicity;
-                        }
-*/
-                        if (thisHelicity.isValid() && !thisHelicity.equals(prevHelicity)) {
-                            System.out.println(String.format("FLIP:  %s %5.2f %3d %7d",
-                                        thisHelicity.toString(),
-                                        1000*thisHelicity.getSecondsDelta(prevHelicity),
-                                        thisHelicity.getEventDelta(prevHelicity),
-                                        counter));
+//                        if (rawScaler.getRows()>0) {
+//                            DaqScalers.StruckRawReading srr = new DaqScalers.StruckRawReading(rawScaler);
+//                            System.out.println(String.format("    :  %+d/  /%+d           %7d",
+//                                    srr.getHelicity(),srr.getQuartet(),counter));
+//                        }
+                        if (!thisHelicity.isValid() || !thisHelicity.equals(prevHelicity)) {
+                            //System.out.println(String.format("FLIP:  %s %5.2f %3d %7d",
+                            //            thisHelicity.toString(),
+                            //            1000*thisHelicity.getSecondsDelta(prevHelicity),
+                            //            thisHelicity.getEventDelta(prevHelicity),
+                            //            counter));
                             helFlip = thisHelicity.makeFlipBank(writer.getSchemaFactory());
                             prevHelicity = thisHelicity;
                         }
@@ -780,7 +752,7 @@ public class CLASDecoder4 {
                     writer.addEvent(decodedEvent,0);
 
                     counter++;
-                    //progress.updateStatus();
+                    progress.updateStatus();
                     if(nevents>0){
                         if(counter>=nevents) break;
                     }
